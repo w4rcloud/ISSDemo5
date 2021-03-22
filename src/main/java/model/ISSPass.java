@@ -1,5 +1,6 @@
 package model;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Setter
+@Getter
 @NoArgsConstructor
 @ToString
 

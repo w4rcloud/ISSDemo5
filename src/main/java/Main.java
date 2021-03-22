@@ -10,6 +10,8 @@ import org.hibernate.cfg.Configuration;
 import repository.ISSPassRepository;
 import repository.ISSPositionRepository;
 
+import java.time.Duration;
+
 public class Main {
 
     public static void main(String[] args) throws JsonProcessingException, InterruptedException {
@@ -58,6 +60,10 @@ public class Main {
 // TODO: 22.03.2021 convert Long and Integer from issPassAPI.getDurations(), issPassAPI.getPassTimes() to Duration /
 //  Date
         System.out.println(issPass);
+
+        // change 'duration' from Long to Duration
+        Duration duration = Duration.ofSeconds(issPass.getDuration1());
+        System.out.println(duration);
 
     }
 }
