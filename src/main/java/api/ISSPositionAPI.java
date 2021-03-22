@@ -15,23 +15,30 @@ public class ISSPositionAPI {
     public ISSPositionAPI() {
     }
 
-
-    public String getLatitude() {
+    public Double getLatitude() {
         String ISSPositionJSON = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .join();
         JSONObject json = new JSONObject(ISSPositionJSON);
         JSONObject coordinates = json.getJSONObject("iss_position");
-        return coordinates.get("latitude").toString();
+        return Double.parseDouble(coordinates.get("latitude").toString());
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         String ISSPositionJSON = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .join();
         JSONObject json = new JSONObject(ISSPositionJSON);
         JSONObject coordinates = json.getJSONObject("iss_position");
-        return coordinates.get("longitude").toString();
+        return Double.parseDouble(coordinates.get("longitude").toString());
+    }
+
+    public long getTimestamp() {
+        String ISSPositionJSON = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .join();
+        JSONObject json = new JSONObject(ISSPositionJSON);
+        return json.getLong("timestamp");
     }
 
 
