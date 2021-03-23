@@ -1,3 +1,4 @@
+import api.ISSPassAPI;
 import api.ISSPositionAPI;
 import model.ISSPass;
 import model.ISSPosition;
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import repository.ISSPositionRepository;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMain {
@@ -17,6 +20,7 @@ public class TestMain {
     private static Session session = null;
     private static ISSPositionRepository issPositionRepository;
     private static ISSPositionAPI issPositionAPI;
+    private static ISSPassAPI issPassAPI;
 
     // creating ISSPosition reference for use in below tests
     private static ISSPosition issPosition = null;
@@ -92,31 +96,22 @@ public class TestMain {
         assertEquals(issPosition, issPositionRepository.findById(1L));
     }
 
+    //assert fetched pass times within range: 22.03.2021 - 22.03.2023
+    @Test
+    public void testISSPassAPI_fetchingPassTimes() {
+        issPassAPI = new ISSPassAPI();
 
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        Long[] passTimes = issPassAPI.getPassTimes(52.23, 21.01);
+        Arrays.stream(passTimes).forEach(pT -> assertTrue(1616407800 <= pT && pT <= 1679479800));
+    }
 
-    //executor service - watki w sda
-    //strategia pacy z gitem - jak nazwyac branche/jak nazwyac commity
-
-//        while (true) {
-//            ISSPosition position = new ISSPosition()
-//                    .setTimestamp(api.getTimestamp())
-//                    .setLatitude(api.getLatitude())
-//                    .setLongitude(api.getLongitude());
-//
-//            repository.add(position);
-//
-//            System.out.println(position);
-//
-//            Thread.sleep(1000);
-//        }
-
-//    @Test
-//    public void testToBeImplemented() {
-//        // creating an ISSPassAPI object with random coordinates - TODO: they will be provided by the user after-production
-//        ISSPassAPI issPassAPI = new ISSPassAPI("50", "50");
-//
+    //assert fetched durations within range: 1ms - 1s
+    @Test
+    public void testISSPassAPI_fetchingDuration() {
+        issPassAPI = new ISSPassAPI();
+        Integer[] passTimes = issPassAPI.getDurations(52.23, 21.01);
+        Arrays.stream(passTimes).forEach(pT -> assertTrue(1 <= pT && pT <= 1000));
+    }
 //        // creating a ISSPass object using methods that fetch durations and pass/rise times for locations specified
 //        // in the above Constructor
 //        ISSPass issPass = new ISSPass(issPassAPI.getDurations(), issPassAPI.getPassTimes());
@@ -142,7 +137,7 @@ public class TestMain {
 //                (issPass.getDuration1() % 3600) / 60, (issPass.getDuration1() % 60)));
 //
 //        System.out.println(duration);
-//    }
+
 
     @AfterAll
     public static void after() {

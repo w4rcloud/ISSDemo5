@@ -3,9 +3,11 @@ package model;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
+@Table(name = "iss_positions")
 @ToString
 
 public class ISSPosition extends BaseEntity {
@@ -28,8 +30,8 @@ public class ISSPosition extends BaseEntity {
     }
 
     public ISSPosition setTimestamp(long timestamp) {
-        this.timestamp = new Date(timestamp * 1000); // * 1000 to convert milliseconds to seconds - otherwise year
-        // was 1970
+        // * 1000 to convert milliseconds to seconds - otherwise year was 1970
+        this.timestamp = new Date(timestamp * 1000);
         return this;
     }
 

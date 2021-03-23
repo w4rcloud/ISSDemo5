@@ -47,11 +47,11 @@ public class Main {
         }
 
         // creating an ISSPassAPI object with random coordinates - TODO: they will be provided by the user after-production
-        ISSPassAPI issPassAPI = new ISSPassAPI("50", "50");
+        ISSPassAPI issPassAPI = new ISSPassAPI();
 
         // creating a ISSPass object using methods that fetch durations and pass/rise times for locations specified
         // in the above Constructor
-        ISSPass issPass = new ISSPass(issPassAPI.getDurations(), issPassAPI.getPassTimes());
+        ISSPass issPass = new ISSPass(issPassAPI.getDurations(50.0,50.0), issPassAPI.getPassTimes(50.0, 50.0));
 
         // creating ISSPassRepository object to store above ISSPass object in DB
         ISSPassRepository issPassRepository = new ISSPassRepository(sessionFactory.createEntityManager());

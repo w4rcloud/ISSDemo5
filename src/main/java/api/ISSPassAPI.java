@@ -13,12 +13,15 @@ public class ISSPassAPI {
     private final HttpClient client = HttpClient.newHttpClient();
     private HttpRequest request;
 
-    public ISSPassAPI(String latitude, String longitude) {
-        this.request = HttpRequest.newBuilder().uri(URI.create(String.format("http://api.open-notify.org/iss-pass.json?lat=%s&lon=%s",
-                latitude, longitude))).build();
-    }
+    public ISSPassAPI() {}
 
-    public Long[] getPassTimes() {
+    // TODO: 23.03.2021 add validation for arguments outside of the proper range
+    public Long[] getPassTimes(Double latitude, Double longitude) {
+        // ',' has to be replaced with '.' as it gets converted somewhere within the logic
+        this.request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("http://api.open-notify.org/iss-pass.json?lat=%f&lon=%f",
+                latitude, longitude).replace(",", "."))).build();
+
         //new Array for storing pass times
         Long[] passTimesAsLongArray = new Long[5];
 
@@ -38,7 +41,13 @@ public class ISSPassAPI {
         return passTimesAsLongArray;
     }
 
-    public Integer[] getDurations() {
+    // TODO: 23.03.2021 add validation for arguments outside of the proper range
+    public Integer[] getDurations(Double latitude, Double longitude) {
+        // ',' has to be replaced with '.' as it gets converted somewhere within the logic
+        this.request = HttpRequest.newBuilder()
+                .uri(URI.create(String.format("http://api.open-notify.org/iss-pass.json?lat=%f&lon=%f",
+                        latitude, longitude).replace(",", "."))).build();
+
         //new Array for storing duration
         Integer[] passTimesAsIntegerArray = new Integer[5];
 
