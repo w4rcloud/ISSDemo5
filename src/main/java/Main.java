@@ -1,6 +1,5 @@
 import api.ISSPassAPI;
 import api.ISSPositionAPI;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.ISSPass;
@@ -14,7 +13,7 @@ import java.time.Duration;
 
 public class Main {
 
-    public static void main(String[] args) throws JsonProcessingException, InterruptedException {
+    public static void main(String[] args) {
 
         SessionFactory sessionFactory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -32,18 +31,20 @@ public class Main {
         //executor service - watki w sda
         //strategia pacy z gitem - jak nazwyac branche/jak nazwyac commity
 
-//        while (true) {
-//            ISSPosition position = new ISSPosition()
-//                    .setTimestamp(api.getTimestamp())
-//                    .setLatitude(api.getLatitude())
-//                    .setLongitude(api.getLongitude());
-//
-//            repository.add(position);
-//
-//            System.out.println(position);
-//
+        int x = 0;
+        while (x < 3) {
+            ISSPosition position = new ISSPosition()
+                    .setTimestamp(api.getTimestamp())
+                    .setLatitude(api.getLatitude())
+                    .setLongitude(api.getLongitude());
+
+            repository.add(position);
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa");
+            System.out.println(position);
+
 //            Thread.sleep(1000);
-//        }
+            x++;
+        }
 
         // creating an ISSPassAPI object with random coordinates - TODO: they will be provided by the user after-production
         ISSPassAPI issPassAPI = new ISSPassAPI("50", "50");
@@ -57,8 +58,8 @@ public class Main {
 
         // storing above object in DB
         issPassRepository.add(issPass);
-// TODO: 22.03.2021 convert Long and Integer from issPassAPI.getDurations(), issPassAPI.getPassTimes() to Duration /
-//  Date
+        // TODO: 22.03.2021 convert Long and Integer from issPassAPI.getDurations(), issPassAPI.getPassTimes() to Duration /
+        //  Date
         System.out.println(issPass);
 
         // change 'duration' from Long to Duration

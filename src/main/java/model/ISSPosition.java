@@ -1,9 +1,12 @@
 package model;
 
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import java.util.Date;
 
 @Entity
+@ToString
 
 public class ISSPosition extends BaseEntity {
 
