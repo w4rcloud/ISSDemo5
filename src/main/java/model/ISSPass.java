@@ -22,6 +22,7 @@ public class ISSPass extends BaseEntity {
     todo: ask Lukasz for alternatives + how to specify order of columns
      */
 
+    // TODO: 23.03.2021 change Type of below fields / vars to Duration / Date
     @Column(name = "duration_1")
     private Integer duration1;
 

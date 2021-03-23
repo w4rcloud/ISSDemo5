@@ -63,6 +63,15 @@ public class Main {
 
         // change 'duration' from Long to Duration
         Duration duration = Duration.ofSeconds(issPass.getDuration1());
+
+        // below method converts Duration to String. EDIT - it
+        // TODO: 23.03.2021 use below method/logic as '@Overwrite toString()' OR create a class/interface that does that
+        //  and would be implemented by classes from this projects
+
+        // TODO: 23.03.2021 idea for method name: getIn_h:mm:ss_format()
+        System.out.println(String.format("%d:%02d:%02d", issPass.getDuration1() / 3600,
+                (issPass.getDuration1() % 3600) / 60, (issPass.getDuration1() % 60)));
+
         System.out.println(duration);
 
     }
