@@ -7,8 +7,10 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "iss_passes")
 @Setter
 @Getter
 @NoArgsConstructor
