@@ -19,7 +19,7 @@ public class ISSPositionAPI {
     public ISSPositionAPI() {
     }
 
-    public Double getLatitude() {
+    public Double fetchLatitude() {
         fetchedAPI = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .join();
@@ -28,7 +28,7 @@ public class ISSPositionAPI {
         return Double.parseDouble(coordinates.get("latitude").toString());
     }
 
-    public Double getLongitude() {
+    public Double fetchLongitude() {
         fetchedAPI = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .join();
@@ -37,13 +37,11 @@ public class ISSPositionAPI {
         return Double.parseDouble(coordinates.get("longitude").toString());
     }
 
-    public long getTimestamp() {
+    public long fetchTimestamp() {
         fetchedAPI = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .join();
         jsonObject = new JSONObject(fetchedAPI);
         return jsonObject.getLong("timestamp");
     }
-
-
 }

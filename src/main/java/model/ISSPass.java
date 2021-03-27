@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import repository.PassTimeAndDuration;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,17 +56,18 @@ public class ISSPass extends BaseEntity {
     @Column(name = "pass_time5")
     private Long passTime5;
 
-    public ISSPass(Integer[] durations, Long[] passTimes) {
-        this.duration1 = durations[0];
-        this.duration2 = durations[1];
-        this.duration3 = durations[2];
-        this.duration4 = durations[3];
-        this.duration5 = durations[4];
-        this.passTime1 = passTimes[0];
-        this.passTime2 = passTimes[1];
-        this.passTime3 = passTimes[2];
-        this.passTime4 = passTimes[3];
-        this.passTime5 = passTimes[4];
+    public ISSPass(PassTimeAndDuration passTimeAndDuration) {
+        this.duration1 = passTimeAndDuration.getDurations()[0];
+        this.duration2 = passTimeAndDuration.getDurations()[1];
+        this.duration3 = passTimeAndDuration.getDurations()[2];
+        this.duration4 = passTimeAndDuration.getDurations()[3];
+        this.duration5 = passTimeAndDuration.getDurations()[4];
+        this.passTime1 = passTimeAndDuration.getPassTimes()[0];
+        this.passTime2 = passTimeAndDuration.getPassTimes()[1];
+        this.passTime3 = passTimeAndDuration.getPassTimes()[2];
+        this.passTime4 = passTimeAndDuration.getPassTimes()[3];
+        this.passTime5 = passTimeAndDuration.getPassTimes()[4];
+
     }
 
 }

@@ -4,29 +4,17 @@ import model.ISSPass;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import java.util.List;
 
-public class ISSPassRepository {
+@SuppressWarnings("unchecked")
+
+public class ISSPassRepository extends BaseRepository<ISSPass>{
 
     private final EntityManager entityManager;
+
 
     public ISSPassRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
-    public ISSPass add(ISSPass issPass) {
-        EntityTransaction transaction = null;
-        try {
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.persist(issPass);
-            transaction.commit();
-            return issPass;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-        return null;
-    }
 }
